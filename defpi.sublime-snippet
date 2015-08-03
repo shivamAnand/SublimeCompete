@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[#define PI 3.14159265359
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>defpi</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<description>#define PI</description>
+	<!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,20 @@
+<snippet>
+	<content><![CDATA[
+#include"bits/stdc++.h"
+using namespace std;
+
+int main()
+{
+
+	$0
+	
+	return 0;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>start</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+	<description>Starting Template</description>
+</snippet>

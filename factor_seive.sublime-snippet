@@ -1,0 +1,31 @@
+<snippet>
+	<content><![CDATA[
+//Factor[i] = 0 means prime, else gives factor
+template<int siz>
+int *factor_seive()
+{
+	static int factor[siz+1] = {};
+	factor[0] = factor[1] = 1;
+	for(int i = 4;i<=siz;i+=2)
+	{
+		factor[i] = 2;
+	}
+	for(int i = 3;i*i<=siz;i+=2)
+	{
+		if(factor[i] == 0)
+		{
+			for(int j = i*i;j<=siz;j+=2*i)
+			{
+				factor[j]=i;
+			}
+		}
+	}
+	return factor;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>get_factor</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+	<description>factor Seive</description>
+</snippet>

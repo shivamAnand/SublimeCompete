@@ -1,0 +1,37 @@
+<snippet>
+	<content><![CDATA[
+#define MOD 1000000007	//Mod
+
+template<typename t>
+inline t add_mod(t a,t b)
+{
+	return (a+b)%MOD;
+}
+
+template<typename t>
+inline t sub_mod(t a,t b)
+{
+	return ((a>b)?(a-b)%MOD:(MOD-b+a)%MOD);
+}
+
+template<typename t>
+t mul_mod(t a,t b)
+{
+	t res = 0;
+	while(b)
+	{
+		if(b&1)
+		{
+			res = add_mod(res,a);
+		}
+		a = add_mod(a,a);
+		b>>=1;
+	}
+	return res;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>get_modulo_ops</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

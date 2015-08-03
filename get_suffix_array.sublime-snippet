@@ -1,0 +1,95 @@
+<snippet>
+	<content><![CDATA[
+#define STRLEN 	$1 //Set to max legth of string
+#define LGSTRLEN $2 //Set to log of string length(ceil)
+#define MOD $3	//Mod - if greater than int,then change for count_distinct_substring also
+
+template<typename t>
+inline t add_mod(t a,t b)
+{
+	return (a+b)%MOD;
+}
+
+struct entry
+{
+	int left,right,index;
+};
+
+int operator < (const entry &a,const entry &b)
+{
+	return (a.left!=b.left?a.left<b.left:a.right<b.right);
+}
+
+int operator == (const entry &a,const entry &b)
+{
+	return (a.left == b.left && a.right == b.right);
+}
+
+int comp[LGSTRLEN][STRLEN];
+int step;
+entry entries[STRLEN];
+
+void suffix_array(char suffix_str[],int n)
+{
+	//int n = strlen(suffix_str);
+	for(int i = 0;i<n;++i)
+	{
+		comp[0][i] = suffix_str[i];
+		entries[i].left = suffix_str[i];
+		entries[i].right = suffix_str[i];
+		entries[i].index = i;
+	}
+	sort(entries,entries+n);
+	int count;
+	for(step = 1,count = 1;count<n;++step,count*=2)
+	{
+		for(int i = 0;i<n;++i)
+		{
+			entries[i].left = comp[step-1][i];
+			entries[i].right = (i+count<n)?comp[step-1][i+count]:-1;
+			entries[i].index = i;
+		}
+		sort(entries,entries+n);
+		comp[step][entries[0].index] = 0;
+		for(int i=1;i<n;++i)
+		{
+			comp[step][entries[i].index] = (entries[i] == entries[i-1])?comp[step][entries[i-1].index]:i;
+		}
+	}
+}
+
+int lcp(int x,int y,int n)//return lcp of suffixes strating at x and y
+{
+	int ret = 0;
+	if(x == y)
+		return n-x;
+	for(int k = step - 1;k>=0 && x<n && y<n;--k)
+	{
+		if(comp[k][x] == comp[k][y])
+		{
+			ret+=1<<k;
+			x+=1<<k;
+			y+=1<<k;
+		}
+	}
+	return ret;
+}
+
+int count_distinct_substr(char suffix_str[],int n)
+{
+	suffix_array(suffix_str,n);
+	int ans = n-entries[0].index;
+	for(int i = 1;i<n;++i)
+	{
+		ans = add_mod(ans,(n-entries[i].index) - lcp(entries[i].index,entries[i-1].index,n));
+	}
+	return ans;
+}
+
+char str[STRLEN+1];
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>get_suffix_array</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

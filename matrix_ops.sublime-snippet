@@ -1,0 +1,91 @@
+<snippet>
+	<content><![CDATA[
+#define N 2 //Size of matrix
+typedef int element_type;//element type of matrix
+element_type temp[N][N];//temporary matrix used by our code
+#define MOD 1000000007	//Mod
+
+template<typename t>
+inline t add_mod(t a,t b)
+{
+	return (a+b)%MOD;
+}
+
+template<typename t>
+inline t sub_mod(t a,t b)
+{
+	return ((a>b)?(a-b)%MOD:(MOD-b+a)%MOD);
+}
+
+template<typename t>
+t mul_mod(t a,t b)
+{
+	t res = 0;
+	while(b)
+	{
+		if(b&1)
+		{
+			res = add_mod(res,a);
+		}
+		a = add_mod(a,a);
+		b>>=1;
+	}
+	return res;
+}
+
+void mat_copy(element_type dest[N][N],element_type src[N][N],int n=N)
+{
+	for(int i = 0;i<n;++i)
+		for(int j = 0;j<n;++j)
+		{
+			dest[i][j] = src[i][j];
+		}
+}
+
+void mat_mul_mod(element_type result[N][N],element_type mat1[N][N],element_type mat2[N][N],int n = N)
+{
+	for(int i = 0;i<n;++i)
+	{
+		for(int j = 0;j<n;++j)
+		{
+			result[i][j] = 0;
+			for(int k = 0;k<n;++k)
+			{
+				result[i][j] = add_mod(result[i][j],mul_mod(mat1[i][k],mat2[k][j]));
+			}
+		}
+	}
+}
+
+void mat_pow_mod(element_type result[N][N],element_type base[N][N],long long pow,int n = N)
+{
+	//Modifies base, if you don't want it modified, copy it first
+	for(int i = 0;i<n;++i)
+	{
+		for(int j = 0;j<n;++j)
+		{
+			result[i][j] = 0;		
+		}
+	}
+	for(int i = 0;i<n;++i)
+	{
+		result[i][i] = 1;
+	}
+	while(pow)
+	{
+		if(pow&1)
+		{
+			mat_copy(temp,result,n);
+			mat_mul_mod(result,temp,base,n);
+		}
+		mat_copy(temp,base,n);
+		mat_mul_mod(base,temp,temp,n);
+		pow>>=1;
+	}
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>get_mat_ops</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

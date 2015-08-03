@@ -1,0 +1,33 @@
+<snippet>
+	<content><![CDATA[
+//It is false if number is prime
+template<int siz>
+bool * not_prime_sieve()
+{
+	static bool is_not_prime[siz+1];
+	is_not_prime[0]=true;
+	is_not_prime[1]=true;
+	for(int i = 4;i<=siz;i+=2)
+	{
+		is_not_prime[i]=true;
+	}
+	for(int i = 3;i*i<=siz;i+=2)
+	{
+		if(!is_not_prime[i])
+		{
+			for(int j=i*i;j<=siz;j+=2*i)
+			{
+				is_not_prime[j]=true;
+			}
+		}
+	}
+	return is_not_prime;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>get_seive</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+	<description>seive</description>
+</snippet>
