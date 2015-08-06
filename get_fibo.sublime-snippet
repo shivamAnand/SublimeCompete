@@ -96,5 +96,5 @@ int fibo_mod(int n)//Here f1 = 1,f0 = 0
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>get_fibo</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
-	<!-- <scope>source.python</scope> -->
+	<scope>source.c++</scope>
 </snippet>

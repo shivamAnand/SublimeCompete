@@ -87,5 +87,5 @@ void mat_pow_mod(element_type result[N][N],element_type base[N][N],long long pow
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>get_mat_ops</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
-	<!-- <scope>source.python</scope> -->
+	<scope>source.c++</scope>
 </snippet>
