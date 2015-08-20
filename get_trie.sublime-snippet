@@ -1,0 +1,66 @@
+<snippet>
+	<content><![CDATA[
+#include"bits/stdc++.h"
+using namespace std;
+
+struct node
+{
+	bool isWord;
+	int next[26];
+	node()
+	{
+		isWord = false;
+		for(int i = 0;i<26;++i)
+		{
+			next[i] = -1;
+		}
+	}
+};
+
+const int maxRequiredCapacity = 5000*16;
+vector<node> trie;
+
+void insert(const string &s)
+{
+	int v = 0;
+	for(char ch:s)
+	{
+		if(trie[v].next[ch-'a'] == -1)
+		{
+			trie[v].next[ch-'a'] = trie.size();
+			trie.push_back(node());
+		}
+		v = trie[v].next[ch-'a'];
+	}
+	trie[v].isWord = true;
+}
+
+vector<int> update(vector<int> original,string nextCharacters)
+{
+	vector<int> res;
+	for(char ch:nextCharacters)
+	{
+		for(int elem:original)
+		{
+			if(trie[elem].next[ch-'a']!=-1)
+			{
+				res.push_back(trie[elem].next[ch-'a']);
+			}
+		}
+	}
+	return res;
+}
+
+int main()
+{
+
+	trie.reserve(maxRequiredCapacity);
+	trie.push_back(node());
+	
+	return 0;
+}
+
+]]></content>
+	<tabTrigger>get_trie</tabTrigger>
+	<scope>source.c++</scope>
+</snippet>
